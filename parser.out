@@ -1,0 +1,315 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    CLAVE
+    RESERVADA
+
+Grammar
+
+Rule 0     S' -> cajero
+Rule 1     cajero -> expression
+Rule 2     expression -> transaction body
+Rule 3     transaction -> RETIRO
+Rule 4     transaction -> CONSULTA
+Rule 5     body -> parameter value body
+Rule 6     body -> parameter value empty
+Rule 7     parameter -> GUION TIPO
+Rule 8     parameter -> GUION CLAVEP
+Rule 9     parameter -> GUION NUMEROT
+Rule 10    parameter -> GUION CANTIDAD
+Rule 11    parameter -> GUION OPCION
+Rule 12    parameter -> GUION COMPROBANTE
+Rule 13    value -> ENTERO
+Rule 14    value -> cadenaApost
+Rule 15    cadenaApost -> APOST CADENA APOST
+Rule 16    cadenaApost -> APOST DIGITAL APOST
+Rule 17    cadenaApost -> APOST IMPRESO APOST
+Rule 18    empty -> <empty>
+
+Terminals, with rules where they appear
+
+APOST                : 15 15 16 16 17 17
+CADENA               : 15
+CANTIDAD             : 10
+CLAVE                : 
+CLAVEP               : 8
+COMPROBANTE          : 12
+CONSULTA             : 4
+DIGITAL              : 16
+ENTERO               : 13
+GUION                : 7 8 9 10 11 12
+IMPRESO              : 17
+NUMEROT              : 9
+OPCION               : 11
+RESERVADA            : 
+RETIRO               : 3
+TIPO                 : 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+body                 : 2 5
+cadenaApost          : 14
+cajero               : 0
+empty                : 6
+expression           : 1
+parameter            : 5 6
+transaction          : 2
+value                : 5 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . cajero
+    (1) cajero -> . expression
+    (2) expression -> . transaction body
+    (3) transaction -> . RETIRO
+    (4) transaction -> . CONSULTA
+
+    RETIRO          shift and go to state 4
+    CONSULTA        shift and go to state 5
+
+    cajero                         shift and go to state 1
+    expression                     shift and go to state 2
+    transaction                    shift and go to state 3
+
+state 1
+
+    (0) S' -> cajero .
+
+
+
+state 2
+
+    (1) cajero -> expression .
+
+    $end            reduce using rule 1 (cajero -> expression .)
+
+
+state 3
+
+    (2) expression -> transaction . body
+    (5) body -> . parameter value body
+    (6) body -> . parameter value empty
+    (7) parameter -> . GUION TIPO
+    (8) parameter -> . GUION CLAVEP
+    (9) parameter -> . GUION NUMEROT
+    (10) parameter -> . GUION CANTIDAD
+    (11) parameter -> . GUION OPCION
+    (12) parameter -> . GUION COMPROBANTE
+
+    GUION           shift and go to state 8
+
+    body                           shift and go to state 6
+    parameter                      shift and go to state 7
+
+state 4
+
+    (3) transaction -> RETIRO .
+
+    GUION           reduce using rule 3 (transaction -> RETIRO .)
+
+
+state 5
+
+    (4) transaction -> CONSULTA .
+
+    GUION           reduce using rule 4 (transaction -> CONSULTA .)
+
+
+state 6
+
+    (2) expression -> transaction body .
+
+    $end            reduce using rule 2 (expression -> transaction body .)
+
+
+state 7
+
+    (5) body -> parameter . value body
+    (6) body -> parameter . value empty
+    (13) value -> . ENTERO
+    (14) value -> . cadenaApost
+    (15) cadenaApost -> . APOST CADENA APOST
+    (16) cadenaApost -> . APOST DIGITAL APOST
+    (17) cadenaApost -> . APOST IMPRESO APOST
+
+    ENTERO          shift and go to state 10
+    APOST           shift and go to state 12
+
+    value                          shift and go to state 9
+    cadenaApost                    shift and go to state 11
+
+state 8
+
+    (7) parameter -> GUION . TIPO
+    (8) parameter -> GUION . CLAVEP
+    (9) parameter -> GUION . NUMEROT
+    (10) parameter -> GUION . CANTIDAD
+    (11) parameter -> GUION . OPCION
+    (12) parameter -> GUION . COMPROBANTE
+
+    TIPO            shift and go to state 13
+    CLAVEP          shift and go to state 14
+    NUMEROT         shift and go to state 15
+    CANTIDAD        shift and go to state 16
+    OPCION          shift and go to state 17
+    COMPROBANTE     shift and go to state 18
+
+
+state 9
+
+    (5) body -> parameter value . body
+    (6) body -> parameter value . empty
+    (5) body -> . parameter value body
+    (6) body -> . parameter value empty
+    (18) empty -> .
+    (7) parameter -> . GUION TIPO
+    (8) parameter -> . GUION CLAVEP
+    (9) parameter -> . GUION NUMEROT
+    (10) parameter -> . GUION CANTIDAD
+    (11) parameter -> . GUION OPCION
+    (12) parameter -> . GUION COMPROBANTE
+
+    $end            reduce using rule 18 (empty -> .)
+    GUION           shift and go to state 8
+
+    parameter                      shift and go to state 7
+    body                           shift and go to state 19
+    empty                          shift and go to state 20
+
+state 10
+
+    (13) value -> ENTERO .
+
+    GUION           reduce using rule 13 (value -> ENTERO .)
+    $end            reduce using rule 13 (value -> ENTERO .)
+
+
+state 11
+
+    (14) value -> cadenaApost .
+
+    GUION           reduce using rule 14 (value -> cadenaApost .)
+    $end            reduce using rule 14 (value -> cadenaApost .)
+
+
+state 12
+
+    (15) cadenaApost -> APOST . CADENA APOST
+    (16) cadenaApost -> APOST . DIGITAL APOST
+    (17) cadenaApost -> APOST . IMPRESO APOST
+
+    CADENA          shift and go to state 21
+    DIGITAL         shift and go to state 22
+    IMPRESO         shift and go to state 23
+
+
+state 13
+
+    (7) parameter -> GUION TIPO .
+
+    ENTERO          reduce using rule 7 (parameter -> GUION TIPO .)
+    APOST           reduce using rule 7 (parameter -> GUION TIPO .)
+
+
+state 14
+
+    (8) parameter -> GUION CLAVEP .
+
+    ENTERO          reduce using rule 8 (parameter -> GUION CLAVEP .)
+    APOST           reduce using rule 8 (parameter -> GUION CLAVEP .)
+
+
+state 15
+
+    (9) parameter -> GUION NUMEROT .
+
+    ENTERO          reduce using rule 9 (parameter -> GUION NUMEROT .)
+    APOST           reduce using rule 9 (parameter -> GUION NUMEROT .)
+
+
+state 16
+
+    (10) parameter -> GUION CANTIDAD .
+
+    ENTERO          reduce using rule 10 (parameter -> GUION CANTIDAD .)
+    APOST           reduce using rule 10 (parameter -> GUION CANTIDAD .)
+
+
+state 17
+
+    (11) parameter -> GUION OPCION .
+
+    ENTERO          reduce using rule 11 (parameter -> GUION OPCION .)
+    APOST           reduce using rule 11 (parameter -> GUION OPCION .)
+
+
+state 18
+
+    (12) parameter -> GUION COMPROBANTE .
+
+    ENTERO          reduce using rule 12 (parameter -> GUION COMPROBANTE .)
+    APOST           reduce using rule 12 (parameter -> GUION COMPROBANTE .)
+
+
+state 19
+
+    (5) body -> parameter value body .
+
+    $end            reduce using rule 5 (body -> parameter value body .)
+
+
+state 20
+
+    (6) body -> parameter value empty .
+
+    $end            reduce using rule 6 (body -> parameter value empty .)
+
+
+state 21
+
+    (15) cadenaApost -> APOST CADENA . APOST
+
+    APOST           shift and go to state 24
+
+
+state 22
+
+    (16) cadenaApost -> APOST DIGITAL . APOST
+
+    APOST           shift and go to state 25
+
+
+state 23
+
+    (17) cadenaApost -> APOST IMPRESO . APOST
+
+    APOST           shift and go to state 26
+
+
+state 24
+
+    (15) cadenaApost -> APOST CADENA APOST .
+
+    GUION           reduce using rule 15 (cadenaApost -> APOST CADENA APOST .)
+    $end            reduce using rule 15 (cadenaApost -> APOST CADENA APOST .)
+
+
+state 25
+
+    (16) cadenaApost -> APOST DIGITAL APOST .
+
+    GUION           reduce using rule 16 (cadenaApost -> APOST DIGITAL APOST .)
+    $end            reduce using rule 16 (cadenaApost -> APOST DIGITAL APOST .)
+
+
+state 26
+
+    (17) cadenaApost -> APOST IMPRESO APOST .
+
+    GUION           reduce using rule 17 (cadenaApost -> APOST IMPRESO APOST .)
+    $end            reduce using rule 17 (cadenaApost -> APOST IMPRESO APOST .)
+
