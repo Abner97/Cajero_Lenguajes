@@ -25,11 +25,15 @@ Rule 14    value -> cadenaApost
 Rule 15    cadenaApost -> APOST CADENA APOST
 Rule 16    cadenaApost -> APOST DIGITAL APOST
 Rule 17    cadenaApost -> APOST IMPRESO APOST
-Rule 18    empty -> <empty>
+Rule 18    cadenaApost -> APOST VISA APOST
+Rule 19    cadenaApost -> APOST MSCARD APOST
+Rule 20    cadenaApost -> APOST AMERICANEXP APOST
+Rule 21    empty -> <empty>
 
 Terminals, with rules where they appear
 
-APOST                : 15 15 16 16 17 17
+AMERICANEXP          : 20
+APOST                : 15 15 16 16 17 17 18 18 19 19 20 20
 CADENA               : 15
 CANTIDAD             : 10
 CLAVE                : 
@@ -40,11 +44,13 @@ DIGITAL              : 16
 ENTERO               : 13
 GUION                : 7 8 9 10 11 12
 IMPRESO              : 17
+MSCARD               : 19
 NUMEROT              : 9
 OPCION               : 11
 RESERVADA            : 
 RETIRO               : 3
 TIPO                 : 7
+VISA                 : 18
 error                : 
 
 Nonterminals, with rules where they appear
@@ -135,6 +141,9 @@ state 7
     (15) cadenaApost -> . APOST CADENA APOST
     (16) cadenaApost -> . APOST DIGITAL APOST
     (17) cadenaApost -> . APOST IMPRESO APOST
+    (18) cadenaApost -> . APOST VISA APOST
+    (19) cadenaApost -> . APOST MSCARD APOST
+    (20) cadenaApost -> . APOST AMERICANEXP APOST
 
     ENTERO          shift and go to state 10
     APOST           shift and go to state 12
@@ -165,7 +174,7 @@ state 9
     (6) body -> parameter value . empty
     (5) body -> . parameter value body
     (6) body -> . parameter value empty
-    (18) empty -> .
+    (21) empty -> .
     (7) parameter -> . GUION TIPO
     (8) parameter -> . GUION CLAVEP
     (9) parameter -> . GUION NUMEROT
@@ -173,7 +182,7 @@ state 9
     (11) parameter -> . GUION OPCION
     (12) parameter -> . GUION COMPROBANTE
 
-    $end            reduce using rule 18 (empty -> .)
+    $end            reduce using rule 21 (empty -> .)
     GUION           shift and go to state 8
 
     parameter                      shift and go to state 7
@@ -201,10 +210,16 @@ state 12
     (15) cadenaApost -> APOST . CADENA APOST
     (16) cadenaApost -> APOST . DIGITAL APOST
     (17) cadenaApost -> APOST . IMPRESO APOST
+    (18) cadenaApost -> APOST . VISA APOST
+    (19) cadenaApost -> APOST . MSCARD APOST
+    (20) cadenaApost -> APOST . AMERICANEXP APOST
 
     CADENA          shift and go to state 21
     DIGITAL         shift and go to state 22
     IMPRESO         shift and go to state 23
+    VISA            shift and go to state 24
+    MSCARD          shift and go to state 25
+    AMERICANEXP     shift and go to state 26
 
 
 state 13
@@ -273,24 +288,45 @@ state 21
 
     (15) cadenaApost -> APOST CADENA . APOST
 
-    APOST           shift and go to state 24
+    APOST           shift and go to state 27
 
 
 state 22
 
     (16) cadenaApost -> APOST DIGITAL . APOST
 
-    APOST           shift and go to state 25
+    APOST           shift and go to state 28
 
 
 state 23
 
     (17) cadenaApost -> APOST IMPRESO . APOST
 
-    APOST           shift and go to state 26
+    APOST           shift and go to state 29
 
 
 state 24
+
+    (18) cadenaApost -> APOST VISA . APOST
+
+    APOST           shift and go to state 30
+
+
+state 25
+
+    (19) cadenaApost -> APOST MSCARD . APOST
+
+    APOST           shift and go to state 31
+
+
+state 26
+
+    (20) cadenaApost -> APOST AMERICANEXP . APOST
+
+    APOST           shift and go to state 32
+
+
+state 27
 
     (15) cadenaApost -> APOST CADENA APOST .
 
@@ -298,7 +334,7 @@ state 24
     $end            reduce using rule 15 (cadenaApost -> APOST CADENA APOST .)
 
 
-state 25
+state 28
 
     (16) cadenaApost -> APOST DIGITAL APOST .
 
@@ -306,10 +342,34 @@ state 25
     $end            reduce using rule 16 (cadenaApost -> APOST DIGITAL APOST .)
 
 
-state 26
+state 29
 
     (17) cadenaApost -> APOST IMPRESO APOST .
 
     GUION           reduce using rule 17 (cadenaApost -> APOST IMPRESO APOST .)
     $end            reduce using rule 17 (cadenaApost -> APOST IMPRESO APOST .)
+
+
+state 30
+
+    (18) cadenaApost -> APOST VISA APOST .
+
+    GUION           reduce using rule 18 (cadenaApost -> APOST VISA APOST .)
+    $end            reduce using rule 18 (cadenaApost -> APOST VISA APOST .)
+
+
+state 31
+
+    (19) cadenaApost -> APOST MSCARD APOST .
+
+    GUION           reduce using rule 19 (cadenaApost -> APOST MSCARD APOST .)
+    $end            reduce using rule 19 (cadenaApost -> APOST MSCARD APOST .)
+
+
+state 32
+
+    (20) cadenaApost -> APOST AMERICANEXP APOST .
+
+    GUION           reduce using rule 20 (cadenaApost -> APOST AMERICANEXP APOST .)
+    $end            reduce using rule 20 (cadenaApost -> APOST AMERICANEXP APOST .)
 

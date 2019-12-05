@@ -147,6 +147,7 @@ def p_value(p):
     '''
     value : ENTERO
           | cadenaApost
+
           
     '''
     p[0]=p[1]

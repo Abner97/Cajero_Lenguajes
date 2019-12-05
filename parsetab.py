@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'APOST CADENA CANTIDAD CLAVE CLAVEP COMPROBANTE CONSULTA DIGITAL ENTERO GUION IMPRESO NUMEROT OPCION RESERVADA RETIRO TIPO\n    cajero : expression\n           \n    \n    expression : transaction body\n    \n    transaction : RETIRO\n                | CONSULTA\n\n    \n    body : parameter value body\n         | parameter value empty\n    \n    parameter : GUION TIPO\n              | GUION CLAVEP\n              | GUION NUMEROT\n              | GUION CANTIDAD\n              | GUION OPCION\n              | GUION COMPROBANTE\n    \n    value : ENTERO\n          | cadenaApost\n          \n    \n    cadenaApost : APOST CADENA APOST\n                | APOST DIGITAL APOST\n                | APOST IMPRESO APOST\n    \n    empty :\n    '
+_lr_signature = 'AMERICANEXP APOST CADENA CANTIDAD CLAVE CLAVEP COMPROBANTE CONSULTA DIGITAL ENTERO GUION IMPRESO MSCARD NUMEROT OPCION RESERVADA RETIRO TIPO VISA\n    cajero : expression\n           \n    \n    expression : transaction body\n    \n    transaction : RETIRO\n                | CONSULTA\n\n    \n    body : parameter value body\n         | parameter value empty\n    \n    parameter : GUION TIPO\n              | GUION CLAVEP\n              | GUION NUMEROT\n              | GUION CANTIDAD\n              | GUION OPCION\n              | GUION COMPROBANTE\n    \n    value : ENTERO\n          | cadenaApost\n\n          \n    \n    cadenaApost : APOST CADENA APOST\n                | APOST DIGITAL APOST\n                | APOST IMPRESO APOST\n                | APOST VISA APOST\n                | APOST MSCARD APOST\n                | APOST AMERICANEXP APOST\n    \n    empty :\n    '
     
-_lr_action_items = {'RETIRO':([0,],[4,]),'CONSULTA':([0,],[5,]),'$end':([1,2,6,9,10,11,19,20,24,25,26,],[0,-1,-2,-18,-13,-14,-5,-6,-15,-16,-17,]),'GUION':([3,4,5,9,10,11,24,25,26,],[8,-3,-4,8,-13,-14,-15,-16,-17,]),'ENTERO':([7,13,14,15,16,17,18,],[10,-7,-8,-9,-10,-11,-12,]),'APOST':([7,13,14,15,16,17,18,21,22,23,],[12,-7,-8,-9,-10,-11,-12,24,25,26,]),'TIPO':([8,],[13,]),'CLAVEP':([8,],[14,]),'NUMEROT':([8,],[15,]),'CANTIDAD':([8,],[16,]),'OPCION':([8,],[17,]),'COMPROBANTE':([8,],[18,]),'CADENA':([12,],[21,]),'DIGITAL':([12,],[22,]),'IMPRESO':([12,],[23,]),}
+_lr_action_items = {'RETIRO':([0,],[4,]),'CONSULTA':([0,],[5,]),'$end':([1,2,6,9,10,11,19,20,27,28,29,30,31,32,],[0,-1,-2,-21,-13,-14,-5,-6,-15,-16,-17,-18,-19,-20,]),'GUION':([3,4,5,9,10,11,27,28,29,30,31,32,],[8,-3,-4,8,-13,-14,-15,-16,-17,-18,-19,-20,]),'ENTERO':([7,13,14,15,16,17,18,],[10,-7,-8,-9,-10,-11,-12,]),'APOST':([7,13,14,15,16,17,18,21,22,23,24,25,26,],[12,-7,-8,-9,-10,-11,-12,27,28,29,30,31,32,]),'TIPO':([8,],[13,]),'CLAVEP':([8,],[14,]),'NUMEROT':([8,],[15,]),'CANTIDAD':([8,],[16,]),'OPCION':([8,],[17,]),'COMPROBANTE':([8,],[18,]),'CADENA':([12,],[21,]),'DIGITAL':([12,],[22,]),'IMPRESO':([12,],[23,]),'VISA':([12,],[24,]),'MSCARD':([12,],[25,]),'AMERICANEXP':([12,],[26,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -27,22 +27,25 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> cajero","S'",1,None,None,None),
-  ('cajero -> expression','cajero',1,'p_cajero','cajero.py',101),
-  ('expression -> transaction body','expression',2,'p_expression','cajero.py',108),
-  ('transaction -> RETIRO','transaction',1,'p_transaction','cajero.py',114),
-  ('transaction -> CONSULTA','transaction',1,'p_transaction','cajero.py',115),
-  ('body -> parameter value body','body',3,'p_body','cajero.py',122),
-  ('body -> parameter value empty','body',3,'p_body','cajero.py',123),
-  ('parameter -> GUION TIPO','parameter',2,'p_parameter','cajero.py',129),
-  ('parameter -> GUION CLAVEP','parameter',2,'p_parameter','cajero.py',130),
-  ('parameter -> GUION NUMEROT','parameter',2,'p_parameter','cajero.py',131),
-  ('parameter -> GUION CANTIDAD','parameter',2,'p_parameter','cajero.py',132),
-  ('parameter -> GUION OPCION','parameter',2,'p_parameter','cajero.py',133),
-  ('parameter -> GUION COMPROBANTE','parameter',2,'p_parameter','cajero.py',134),
-  ('value -> ENTERO','value',1,'p_value','cajero.py',140),
-  ('value -> cadenaApost','value',1,'p_value','cajero.py',141),
-  ('cadenaApost -> APOST CADENA APOST','cadenaApost',3,'p_cadenaApost','cajero.py',148),
-  ('cadenaApost -> APOST DIGITAL APOST','cadenaApost',3,'p_cadenaApost','cajero.py',149),
-  ('cadenaApost -> APOST IMPRESO APOST','cadenaApost',3,'p_cadenaApost','cajero.py',150),
-  ('empty -> <empty>','empty',0,'p_empty','cajero.py',157),
+  ('cajero -> expression','cajero',1,'p_cajero','cajero.py',105),
+  ('expression -> transaction body','expression',2,'p_expression','cajero.py',112),
+  ('transaction -> RETIRO','transaction',1,'p_transaction','cajero.py',118),
+  ('transaction -> CONSULTA','transaction',1,'p_transaction','cajero.py',119),
+  ('body -> parameter value body','body',3,'p_body','cajero.py',126),
+  ('body -> parameter value empty','body',3,'p_body','cajero.py',127),
+  ('parameter -> GUION TIPO','parameter',2,'p_parameter','cajero.py',133),
+  ('parameter -> GUION CLAVEP','parameter',2,'p_parameter','cajero.py',134),
+  ('parameter -> GUION NUMEROT','parameter',2,'p_parameter','cajero.py',135),
+  ('parameter -> GUION CANTIDAD','parameter',2,'p_parameter','cajero.py',136),
+  ('parameter -> GUION OPCION','parameter',2,'p_parameter','cajero.py',137),
+  ('parameter -> GUION COMPROBANTE','parameter',2,'p_parameter','cajero.py',138),
+  ('value -> ENTERO','value',1,'p_value','cajero.py',144),
+  ('value -> cadenaApost','value',1,'p_value','cajero.py',145),
+  ('cadenaApost -> APOST CADENA APOST','cadenaApost',3,'p_cadenaApost','cajero.py',153),
+  ('cadenaApost -> APOST DIGITAL APOST','cadenaApost',3,'p_cadenaApost','cajero.py',154),
+  ('cadenaApost -> APOST IMPRESO APOST','cadenaApost',3,'p_cadenaApost','cajero.py',155),
+  ('cadenaApost -> APOST VISA APOST','cadenaApost',3,'p_cadenaApost','cajero.py',156),
+  ('cadenaApost -> APOST MSCARD APOST','cadenaApost',3,'p_cadenaApost','cajero.py',157),
+  ('cadenaApost -> APOST AMERICANEXP APOST','cadenaApost',3,'p_cadenaApost','cajero.py',158),
+  ('empty -> <empty>','empty',0,'p_empty','cajero.py',165),
 ]
