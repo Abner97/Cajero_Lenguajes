@@ -1,16 +1,23 @@
 import ply.lex as lex
 import ply.yacc as yacc
 import sys
+from random import seed
+from random import random
+import subprocess as sp
 
 #ejemplo del lenguaje
 #retiro -t 'visa a' -n 1234 5432 4567 5432 -c 4567 -cant 50 -comp 'digital'
 #consulta -t 'visa' -n 1234 5432 4567 5432 -c 4567 -op 'saldo'
-
+cont = 0
+seed(1)
 reserved = {
     'retiro' : 'RETIRO',
     'consulta': 'CONSULTA',
     'digital':'DIGITAL',
     'impreso': 'IMPRESO',
+    'visa':'VISA',
+    'mastercard':'MSCARD',
+    'americanexpress':'AMERICANEXP',
     't': 'TIPO',
     'c': 'CLAVEP',
     'n': 'NUMEROT',
@@ -96,35 +103,36 @@ while 1 :
                 break
         print (tok)
 '''
-def p_cajero(p):
+
+def p_cajero(p):#p[0]
     '''
     cajero : expression
            
     '''
-    print(p[1]) 
+    print(run(p[1])) 
 
-def p_expression(p):
+
+def p_expression(p):#p[1]
     '''
     expression : transaction body
     '''
     p[0]=(p[1],p[2])
 
-def p_transaction(p):
+def p_transaction(p):#p[0]
     '''
     transaction : RETIRO
                 | CONSULTA
-
     '''
     p[0]=p[1]
 
-def p_body(p):
+def p_body(p):#p[1]
     '''
     body : parameter value body
          | parameter value empty
     '''
     p[0]=(p[1],p[2],p[3])
 
-def p_parameter(p):
+def p_parameter(p):#p[1][0]
     '''
     parameter : GUION TIPO
               | GUION CLAVEP
@@ -148,6 +156,9 @@ def p_cadenaApost(p):
     cadenaApost : APOST CADENA APOST
                 | APOST DIGITAL APOST
                 | APOST IMPRESO APOST
+                | APOST VISA APOST
+                | APOST MSCARD APOST
+                | APOST AMERICANEXP APOST
     '''
     p[0]=p[2]
 
@@ -157,12 +168,54 @@ def p_empty(p):
     empty :
     '''
     p[0]=None
+
 def p_error(p):
     print ("Sintax error",p)
 
 parser = yacc.yacc()
 
 
+def retiro(numero,tarjeta,monto,comprobante):
+    tmp = sp.call('clear',shell=True)
+    global cont
+    print("Usted está retirando $",monto)
+    cont = cont + 1
+    if comprobante=="digital":
+
+        print("Tarjeta: ",tarjeta," ","#",numero,"\n")
+        print("Monto a retirado: $",monto,"\n")
+        print("Transaccion #",cont)
+    elif comprobante =="impreso":
+        print("Retire su comprobante")
+
+def consulta(tarjeta,numero,opcion):
+    tmp = sp.call('clear',shell=True)
+    value = random()
+    scaled_value = 0 + (value * (10000 - 0))
+    
+    if opcion == "saldo":
+        print("usted tiene un saldo de $",scaled_value)
+    elif opcion == None or opcion!='saldo':
+        print("Error porfavor introduzca una opcion valida")
+    
+        
+
+
+def run(p):
+    
+    if p[0]=='retiro':
+        retiro(tarjeta=p[1][1],numero=p[1][2][1],monto=p[1][2][2][2][1],comprobante=p[1][2][2][2][2][1])
+
+    elif p[0]=='consulta':
+        consulta(tarjeta=p[1][1],numero=p[1][2][1],opcion=p[1][2][2][2][1])
+
+
+            
+#tarjeta p[1][1]
+#numero p[1][2][1]
+#clave p[1][2][2][1]
+#canridad p[1][2][2][2][1]
+#comprobante p[1][2][2][2][2][1]
 while True:
     try:
         s = input('')
